@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api ./backend
 
       - name: Push Docker image
         run: |
