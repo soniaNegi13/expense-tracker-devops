@@ -1,0 +1,29 @@
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+// In-memory DB (simple for now)
+let expenses = [];
+
+// Get all expenses
+app.get("/expenses", (req, res) => {
+  res.json(expenses);
+});
+
+// Add expense
+app.post("/expenses", (req, res) => {
+  const expense = req.body;
+  expenses.push(expense);
+  res.status(201).json(expense);
+});
+
+// Health check (VERY IMPORTANT for DevOps)
+app.get("/health", (req, res) => {
+  res.send("OK");
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
