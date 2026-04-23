@@ -23,11 +23,11 @@ jobs:
       - name: Build Docker image
         run: |
           #1docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api ./backend
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:${{ github.sha }} . \
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:latest .                  #Build ONCE, tag twice
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:${{ github.sha }} ./backend
+            docker tag ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:latest                  #Build ONCE, tag twice
 
       - name: Push Docker image
         run: |
-          #1docker push ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:${{ github.sha }} . \
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:latest .
+          #1docker push ${{ secrets.DOCKER_USERNAME }}/expense-tracker-apii
+          docker push ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/expense-tracker-api:latest
